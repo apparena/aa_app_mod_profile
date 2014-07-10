@@ -1,0 +1,205 @@
+<div id="profile">
+    <!-- headline -->
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="page-title"><%- _.t('account') %>
+                <small><%- _.t('of') %> <%- fullname %></small>
+            </h2>
+        </div>
+    </div>
+    <!-- avatar and name -->
+    <div class="row">
+        <div class="col-md-12">
+            <section class="widget">
+                <header>
+                    <h4><i class="fa fa-user"></i> <%- _.t('account') %>
+                        <small><%- _.t('edit_your_account') %></small>
+                    </h4>
+                </header>
+                <div class="body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="text-align-center">
+                                <img class="img-circle" src="<%- avatar %>" alt="avatar 163x163">
+<!-- ToDo: Clickevent für Bildbearbeitung -->
+                                <!--<div class="change_img">
+                                    <a class="btn btn-transparent btn-sm" href="#" role="button" rel="toggle"><i class="fa fa-pencil"></i>
+                                        <span><%- _.t('edit_profile_picture') %></span></a>
+                                </div>-->
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <h3 class="no-margin fullname"><%- fullname %></h3>
+                            <address class="hide">
+                                <abbr title="team"><%- _.t('team') %>:</abbr> <a href="#">&nbsp;</a>
+                            </address>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- user data -->
+    <div class="row">
+        <div class="col-md-12">
+            <section class="widget">
+                <form id="user-form" class="form-horizontal label-left"
+                      novalidate="novalidate"
+                      method="post"
+                      data-validate="parsley">
+                    <fieldset>
+                        <legend><%- _.t('edit_data') %>
+                            <small><%- _.t('edit_data_description') %></small>
+                        </legend>
+                    </fieldset>
+                    <fieldset>
+                        <legend class="section"><%- _.t('data') %></legend>
+
+                        <div class="control-group">
+                            <label for="email" class="control-label"><%= _.t('email') %> *</label>
+
+                            <div class="controls form-group">
+                                <input type="email" name="email" id="email" class="form-control" value="<%= userdata.email %>" placeholder="<%= _.t('ph_email') %>" required />
+                            </div>
+                        </div>
+
+                        <% if(_.c('mod_participate_userdata').indexOf('name') !== -1) { %>
+                        <div class="control-group">
+                            <label class="control-label"><%= _.t('first_and_lastname') %> <%= (required.name)?'*':'' %></label>
+
+                            <div class="controls form-group">
+                                <div class="col-sm-2">
+                                    <label for="gender" class="hide"><%= _.t('gender') %></label>
+                                    <select name="gender" id="gender" class="form-control">
+                                        <option value="woman" <%= (userdata.gender === 'women')?' selected':'' %>><%= _.t('woman') %></option>
+                                        <option value="men" <%= (userdata.gender === 'men')?' selected':'' %>><%= _.t('man') %></option>
+                                    </select>
+                                </div>
+
+                                <div class="clearfix visible-xs"></div>
+
+                                <div class="col-sm-5">
+                                    <label for="firstname" class="hide"><%= _.t('firstname') %> <%= (required.name)?'*':'' %></label>
+                                    <input type="text" name="firstname" id="firstname" class="form-control" value="<%= userdata.firstname %>" placeholder="<%= _.t('ph_firstname') %>" <%= (required.name)?'required':'' %> />
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <label for="lastname" class="hide"><%= _.t('lastname') %> <%= (required.name)?'*':'' %></label>
+                                    <input type="text" name="lastname" id="lastname" class="form-control" value="<%= userdata.lastname %>" placeholder="<%= _.t('ph_lastname') %>" <%= (required.name)?'required':'' %> />
+                                </div>
+                            </div>
+                        </div>
+                        <% }
+
+                        if(_.c('mod_participate_userdata').indexOf('birthday') !== -1) { %>
+                        <div class="control-group">
+                            <label for="birthday" class="control-label"><%= _.t('birthday') %> <%= (required.birthday)?'*':'' %></label>
+
+                            <div class="controls form-group">
+                                <input type="text" name="birthday" id="birthday" class="form-control" value="<%= userdata.birthday %>" placeholder="<%= _.t('ph_birthday') %>" <%= (required.name)?'required':'' %> />
+                            </div>
+                        </div>
+                        <% }
+
+                        if(_.c('mod_participate_userdata').indexOf('address') !== -1) { %>
+                        <div class="control-group">
+                            <label for="street" class="control-label"><%= _.t('street') %> <%= (required.address)?'*':'' %></label>
+
+                            <div class="controls form-group">
+                                <input type="text" name="street" id="street" class="form-control" value="<%= userdata.street %>" placeholder="<%= _.t('ph_street') %>" <%= (required.address)?'required':'' %> />
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label"><%= _.t('zip_city') %> <%= (required.address)?'*':'' %></label>
+                            <label class="hide" for="zip"><%= _.t('zip') %> <%= (required.address)?'*':'' %></label>
+                            <label class="hide" for="city"><%= _.t('city') %> <%= (required.address)?'*':'' %></label>
+
+                            <div class="controls form-group">
+                                <div class="col-sm-3">
+                                    <input type="text" name="zip" id="zip" class="form-control" value="<%= userdata.zip %>" placeholder="<%= _.t('ph_zip') %>" <%= (required.address)?'required':'' %> />
+                                </div>
+
+                                <div class="col-sm-9">
+                                    <input type="text" name="city" id="city" class="form-control" value="<%= userdata.city %>" placeholder="<%= _.t('ph_city') %>" <%= (required.address)?'required':'' %> />
+                                </div>
+                            </div>
+                        </div>
+                        <% }
+
+                        if(_.c('mod_participate_userdata').indexOf('field1') !== -1) { %>
+                        <div class="control-group">
+                            <label for="field1" class="control-label"><%= _.c('user_data_indi_field1') %> <%= (required.field1)?'*':'' %></label>
+
+                            <div class="controls form-group">
+                                <input type="text" name="field1" id="field1" value="<%= userdata.field1 %>" class="form-control" placeholder="<%= _.t('ph_indi_field1') %>" <%= (required.field1)?'required':'' %> />
+                            </div>
+                        </div>
+                        <% }
+
+                        if(_.c('mod_participate_userdata').indexOf('field2') !== -1) { %>
+                        <div class="control-group">
+                            <label for="field2" class="control-label"><%= _.c('user_data_indi_field2') %> <%= (required.field2)?'*':'' %></label>
+
+                            <div class="controls form-group">
+                                <input type="text" name="field2" id="field2" value="<%= userdata.field2 %>" class="form-control" placeholder="<%= _.t('ph_indi_field2') %>" <%= (required.field2)?'required':'' %> />
+                            </div>
+                        </div>
+                        <% }
+
+                        if(_.c('mod_participate_userdata').indexOf('field3') !== -1) { %>
+                        <div class="control-group">
+                            <label for="field3" class="control-label"><%= _.c('user_data_indi_field3') %> <%= (required.field3)?'*':'' %></label>
+
+                            <div class="controls form-group">
+                                <input type="text" name="field3" id="field3" value="<%= userdata.field3 %>" class="form-control" placeholder="<%= _.t('ph_indi_field3') %>" <%= (required.field3)?'required':'' %> />
+                            </div>
+                        </div>
+                        <% }
+
+
+                        if(_.c('reminder_activated') === '1' || _.c('reminder_activated') === 'y'){ %>
+                        <div class="control-group hide">
+                            <div class="controls">
+                                <label for="reminder" class="checkbox">
+                                    <input type="checkbox" id="reminder" name="reminder" <%= reminder %> />
+                                    <%= _.t('profile_reminder_label') %>
+                                </label>
+                            </div>
+                        </div>
+                        <% }
+
+
+                        if(_.c('mod_newsletter_activated') === '1' || _.c('mod_newsletter_activated') === 'y') { %>
+                        <div class="control-group hide">
+                            <div class="controls">
+                                <label for="newsletter" class="checkbox">
+                                    <input type="checkbox" id="newsletter" name="newsletter" <%= newsletter %> />
+                                    <%= _.t('profile_newsletter_label') %>
+                                </label>
+                            </div>
+                        </div>
+                        <% }
+
+                        if(login_type === 'appuser') { %>
+                        <div class="control-group">
+                            <label for="password" class="control-label"><%= _.t('password') %> *</label>
+
+                            <div class="controls form-group">
+                                <input type="password" name="password" id="password" value="" class="form-control" placeholder="<%= _.t('ph_password') %>" required />
+                            </div>
+                        </div>
+                        <% } %>
+                        <input type="hidden" name="login_mail" id="login_mail" value="<%- login_mail %>" />
+                        <input type="hidden" name="login_type" id="login_type" value="<%- login_type %>" />
+                        <input type="hidden" name="login_sid" id="login_sid" value="<%- login_sid %>" />
+
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="button" id="profile-submit" class="btn btn-primary"><%= _.t('save') %></button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>

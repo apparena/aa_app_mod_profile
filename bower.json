@@ -1,0 +1,8 @@
+{
+    "name":         "aa_app_mod_profile",
+    "version":      "1.0.0",
+    "main":         "./js/main.js",
+    "dependencies": {
+        "aa_app_mod_auth": "latest"
+    }
+}
