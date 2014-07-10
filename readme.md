@@ -1,11 +1,7 @@
 # App-Arena.com App Module Boilerplate
-
-## Information
-* **Github:** [Repository](https://github.com/apparena/aa_app_mod_profile)
-* **Docs:**   [Appalizr.com](http://www.appalizr.com/docs.html)
+* **Github:** https://github.com/apparena/aa_app_mod_profile
+* **Docs:**   http://www.appalizr.com/index.php/profile.html
 * This is a module of the [aa_app_template](https://github.com/apparena/aa_app_template)
-
-This is a module of the [aa_app_template](https://github.com/apparena/aa_app_template)
 
 ## Module job
 Shows a new page to edit profile information, change password and later handle avatars, nickname and much more. Work in progress, but currently a stable version with basic functions.
